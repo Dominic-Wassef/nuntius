@@ -1,4 +1,4 @@
-# Ranked
+# nihilo
 
 An pusher server implementation compatible with Pusher client libraries written in Go.
 
