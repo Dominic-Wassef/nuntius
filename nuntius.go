@@ -22,10 +22,8 @@ import (
 // Start parses the configuration file and starts the server
 func Start(filename string) {
 	var conf config.File
-
 	// seed for random functions
 	rand.Seed(time.Now().Unix())
-
 	data, err := ioutil.ReadFile(filename)
 	if err != nil {
 		log.Error(err)
@@ -57,13 +55,11 @@ func Start(filename string) {
 			a.WebHooks.Enabled,
 			a.WebHooks.URL,
 		)
-
 		if err := inMemoryStorage.AddApp(application); err != nil {
 			log.Error(err)
 			return
 		}
 	}
-
 	router := mux.NewRouter()
 	router.Use(handlers.RecoveryHandler())
 
@@ -96,7 +92,6 @@ func Start(filename string) {
 			log.Fatal(http.ListenAndServeTLS(conf.SSL.Host, conf.SSL.CertFile, conf.SSL.KeyFile, router))
 		}()
 	}
-
-	log.Infof("Starting HTTP service on %s ...", conf.Host)
+	log.Infof("Starting HTTP service on %s ..", conf.Host)
 	log.Fatal(http.ListenAndServe(conf.Host, router))
 }
